@@ -297,7 +297,7 @@ export function RecruiterForm({ form, onSubmit }: RecruiterFormProps) {
                   <FormItem>
                     <FormLabel>ZIP/Postal Code</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter ZIP code" {...field} />
+                      <Input inputMode="numeric"  placeholder="Enter ZIP code" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

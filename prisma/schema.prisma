@@ -1,0 +1,61 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+    ADMIN
+    CANDIDATE
+    RECRUITER
+}
+
+model User {
+    id             String    @id @default(uuid())
+    name           String
+    email          String    @unique
+    emailVerified  DateTime?
+    hashedPassword String?
+    role           UserRole  @default(CANDIDATE)
+
+    skills             String[]
+    experience         String?
+    profileDescription String?
+    profileDomain      String?
+    portfolioUrl       String?
+    githubUrl          String?
+
+    companyName        String?
+    companyEmail       String?
+    companySize        String?
+    Industry           String?
+    companyWebsite     String?
+    companyDescription String?
+    jobTitle           String?
+    department         String?
+
+    linkedInUrl String?
+
+    addressId String
+    address   Address @relation(fields: [addressId], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Address {
+    id      String @id @default(uuid())
+    street  String
+    city    String
+    state   String
+    zipcode Int
+    country String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    User      User[]
+}
