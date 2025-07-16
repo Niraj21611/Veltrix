@@ -49,16 +49,13 @@ export const nextauthOptions: NextAuthOptions = {
         return user;
       },
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
+
   ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.email = user.email ?? "";
+        token.email = user.email;
         token.role = user.role;
         token.name = user.name;
       } else if (token?.email) {
@@ -101,27 +98,5 @@ export const nextauthOptions: NextAuthOptions = {
       return session;
     },
 
-    async signIn({ user, account }) {
-      if (account?.provider === "google") {
-        const existingUser = await prisma.user.findUnique({
-          where: { email: user.email! },
-        });
-
-        if (!existingUser) {
-          const name = user.name ?? "Unnamed";
-
-          await prisma.user.create({
-            data: {
-              email: user.email!,
-              name,
-              role: "CANDIDATE",
-              image: user.image,
-            },
-          });
-        }
-      }
-
-      return true;
-    },
   },
 };
