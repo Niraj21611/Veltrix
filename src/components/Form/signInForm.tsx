@@ -12,7 +12,7 @@ import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { userSignInValidation } from "@/lib/validations/auth"
 import { useState } from "react"
-import ForgotPasswordDialog from "../Dialog/forgetPasswordDialog"
+// import ForgotPasswordDialog from "../Dialog/forgetPasswordDialog"
 
 interface SignInFormProps {
   callbackUrl?: string
@@ -148,12 +148,12 @@ export default function LoginForm({ callbackUrl: propCallbackUrl }: SignInFormPr
         </Form>
       </div>
 
-      {isForgetPasswordOpen && (
+      {/* {isForgetPasswordOpen && (
         <ForgotPasswordDialog
           isForgetPasswordOpen={isForgetPasswordOpen}
           setIsForgetPasswordOpen={setIsForgetPasswordOpen}
         />
-      )}
+      )} */}
     </>
   )
 }

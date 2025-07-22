@@ -50,7 +50,7 @@ export default function SignUpPage() {
     defaultValues: {
       skills: [],
       education: [{ degree: "", institution: "", year: "", field: "" }],
-      address: { street: "", city: "", state: "", zipCode: "", country: "" },
+      address: { street: "", city: "", state: "", zipCode: "0", country: "" },
     },
   });
 
@@ -61,7 +61,7 @@ export default function SignUpPage() {
         street: "",
         city: "",
         state: "",
-        zipCode: "",
+        zipCode: "0",
         country: "",
       },
     },
@@ -134,23 +134,18 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-4xl">
-        <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold text-gray-900">
-            Join TalentHub
-          </CardTitle>
-          <CardDescription className="text-lg text-gray-600">
-            {getStepDescription()}
-          </CardDescription>
-          <div className="mt-6">
-            <div className="flex justify-between text-sm text-gray-500 mb-2">
-              <span>Step {currentStep} of 3</span>
-              <span>{getStepTitle()}</span>
-            </div>
-            <Progress value={(currentStep / 3) * 100} className="h-2" />
-          </div>
-        </CardHeader>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-40 left-40 w-80 h-80 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+      </div>
+
+      {/* Glass morphism overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-3xl"></div>
+
+      <Card className="w-full max-w-4xl relative z-10 bg-white/95 backdrop-blur-xl border-0 shadow-2xl">
         <CardContent className="space-y-6">
           {currentStep === 1 && (
             <BasicInfoForm
